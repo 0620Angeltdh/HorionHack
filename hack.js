@@ -1,4 +1,6 @@
 (function(){
+  alert("✅ Hack cargado correctamente"); // Mensaje visible al activar
+
   const _x1 = ["x","y","hp","isPlayer",".hp"];
   const _d = (a,b)=>Math.hypot(a[_x1[0]]-b[_x1[0]],a[_x1[1]]-b[_x1[1]]);
   const _e = ()=>{const r=[];for(const k in window){const v=window[k];if(v&&typeof v==="object"){try{for(const o of Object.values(v)){if(o&&typeof o[_x1[2]]==="number"&&typeof o[_x1[0]]==="number"){r.push(o);}}}catch{}}}return r;};
