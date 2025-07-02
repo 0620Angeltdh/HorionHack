@@ -7,98 +7,56 @@
       background-color: #111;
       color: #0f0;
       font-family: sans-serif;
-      text-align: center;
-      padding-top: 50px;
+      margin: 0;
+      padding: 0;
     }
     .menu {
-      background: #222;
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1a1a1a;
       border: 2px solid #0f0;
+      padding: 15px 20px;
       border-radius: 10px;
-      padding: 20px;
-      display: inline-block;
+      z-index: 9999;
+      width: 250px;
     }
     .menu h2 {
-      margin-bottom: 10px;
+      margin-top: 0;
+      font-size: 18px;
+      text-align: center;
     }
-    .toggle {
-      padding: 10px 20px;
-      background: #0f0;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      font-weight: bold;
-      cursor: pointer;
+    .menu label {
+      display: block;
+      margin: 10px 0 5px;
     }
-    .range-input {
-      width: 200px;
+    .menu input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    .menu hr {
+      border: 1px solid #0f0;
+      margin: 10px 0;
     }
   </style>
 </head>
 <body>
+
   <div class="menu">
-    <h2>Bloxd.io Kill Aura</h2>
-    <button id="toggleAura" class="toggle">Activar Kill Aura</button><br><br>
-    <label for="range">Rango de ataque: <span id="rangeVal">5.5</span></label><br>
-    <input type="range" id="range" min="1" max="10" step="0.1" value="5.5" class="range-input">
+    <h2>🔥 Bloxd.io Hacks</h2>
+    <label><input type="checkbox" disabled> Kill Aura</label>
+    <label><input type="checkbox" disabled> DamageFly</label>
+    <label><input type="checkbox" disabled> WallBoost</label>
+    <label><input type="checkbox" disabled> Damage Boost</label>
+    <label><input type="checkbox" disabled> Bhop</label>
+    <label><input type="checkbox" disabled> No Knockback</label>
+    <label><input type="checkbox" disabled> ESP (Wallhack)</label>
+    <label><input type="checkbox" disabled> Player Finder</label>
+    <label><input type="checkbox" disabled> Auto Click</label>
+    <label><input type="checkbox" disabled> Speed Hack</label>
+    <label><input type="checkbox" disabled> Long Jump</label>
+    <hr>
+    <p style="text-align:center; font-size: 14px;">Funcionalidad próximamente</p>
   </div>
 
-  <script>
-    let auraActive = false;
-    let intervalId = null;
-    let attackRange = 5.5;
-
-    const updateRange = () => {
-      attackRange = parseFloat(document.getElementById("range").value);
-      document.getElementById("rangeVal").textContent = attackRange.toFixed(1);
-    };
-
-    document.getElementById("range").addEventListener("input", updateRange);
-
-    const toggleBtn = document.getElementById("toggleAura");
-    toggleBtn.onclick = () => {
-      auraActive = !auraActive;
-      toggleBtn.textContent = auraActive ? "Desactivar Kill Aura" : "Activar Kill Aura";
-
-      if (auraActive) {
-        intervalId = setInterval(() => {
-          try {
-            const all = [];
-            for (const k in window) {
-              const v = window[k];
-              if (v && typeof v === "object") {
-                try {
-                  for (const o of Object.values(v)) {
-                    if (o && typeof o.hp === "number" && typeof o.x === "number") {
-                      all.push(o);
-                    }
-                  }
-                } catch {}
-              }
-            }
-
-            const player = all.find(e => e?.isPlayer);
-            if (!player) return;
-
-            const enemies = all.filter(
-              e => e !== player && e.hp > 0 && Math.hypot(e.x - player.x, e.y - player.y) <= attackRange
-            );
-
-            const attack = Object.values(window).find(
-              f => typeof f === "function" && f.toString().includes(".hp")
-            );
-
-            if (attack) {
-              for (const enemy of enemies) {
-                attack(enemy);
-              }
-            }
-          } catch {}
-        }, 75);
-      } else {
-        clearInterval(intervalId);
-        intervalId = null;
-      }
-    };
-  </script>
 </body>
 </html>
