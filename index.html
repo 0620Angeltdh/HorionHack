@@ -4,59 +4,140 @@
   <title>Bloxd.io Hack Menu</title>
   <style>
     body {
-      background-color: #111;
-      color: #0f0;
-      font-family: sans-serif;
       margin: 0;
-      padding: 0;
+      background-color: #0b0f1a;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://i.imgur.com/jBXaGmQ.png'); /* puedes reemplazar por tu fondo */
+      background-size: cover;
+      background-position: center;
     }
+
     .menu {
       position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #1a1a1a;
-      border: 2px solid #0f0;
-      padding: 15px 20px;
-      border-radius: 10px;
+      top: 30px;
+      left: 30px;
+      background: rgba(15, 30, 60, 0.95);
+      border: 2px solid #00bfff;
+      border-radius: 15px;
+      padding: 25px;
+      width: 350px;
+      box-shadow: 0 0 20px #00bfff88;
       z-index: 9999;
-      width: 250px;
+      cursor: pointer;
     }
+
     .menu h2 {
-      margin-top: 0;
-      font-size: 18px;
+      font-size: 24px;
+      text-align: center;
+      color: #00bfff;
+      margin-bottom: 15px;
+    }
+
+    .hack-option {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+      padding: 8px 12px;
+      background: #0f172a;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .hack-option:hover {
+      background: #1e293b;
+    }
+
+    .key-panel {
+      margin-top: 15px;
+      padding: 10px;
+      background: #1e293b;
+      border-radius: 10px;
+      display: none;
       text-align: center;
     }
-    .menu label {
-      display: block;
-      margin: 10px 0 5px;
+
+    .key-panel input {
+      padding: 8px;
+      width: 80px;
+      text-align: center;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      margin-top: 8px;
     }
-    .menu input[type="checkbox"] {
-      margin-right: 8px;
+
+    .decor {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
     }
-    .menu hr {
-      border: 1px solid #0f0;
-      margin: 10px 0;
+
+    .decor img {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      background: #0f172a;
+      padding: 5px;
+    }
+
+    .footer {
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: center;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
 
-  <div class="menu">
-    <h2>🔥 Bloxd.io Hacks</h2>
-    <label><input type="checkbox" disabled> Kill Aura</label>
-    <label><input type="checkbox" disabled> DamageFly</label>
-    <label><input type="checkbox" disabled> WallBoost</label>
-    <label><input type="checkbox" disabled> Damage Boost</label>
-    <label><input type="checkbox" disabled> Bhop</label>
-    <label><input type="checkbox" disabled> No Knockback</label>
-    <label><input type="checkbox" disabled> ESP (Wallhack)</label>
-    <label><input type="checkbox" disabled> Player Finder</label>
-    <label><input type="checkbox" disabled> Auto Click</label>
-    <label><input type="checkbox" disabled> Speed Hack</label>
-    <label><input type="checkbox" disabled> Long Jump</label>
-    <hr>
-    <p style="text-align:center; font-size: 14px;">Funcionalidad próximamente</p>
+  <div class="menu" onclick="toggleKeyPanel()">
+    <h2>Bloxd.io Hacks</h2>
+
+    <div class="hack-option"><span>✅ Kill Aura</span><span>[OFF]</span></div>
+    <div class="hack-option"><span>✈️ Fly</span><span>[OFF]</span></div>
+    <div class="hack-option"><span>🧱 WallBoost</span><span>[OFF]</span></div>
+    <div class="hack-option"><span>💥 Damage Boost</span><span>[OFF]</span></div>
+    <div class="hack-option"><span>🏃 Bhop</span><span>[OFF]</span></div>
+    <div class="hack-option"><span>🚫 Knockback</span><span>[OFF]</span></div>
+    <div class="hack-option"><span>🧍 ESP</span><span>[OFF]</span></div>
+
+    <div class="key-panel" id="keyPanel">
+      <p>Presiona la tecla que usarás para activar el hack:</p>
+      <input id="keyInput" type="text" maxlength="1" placeholder="Ej: K" onkeyup="setKey(this)">
+    </div>
+
+    <div class="decor">
+      <img src="https://i.imgur.com/1LOsyg6.png" alt="arbol">
+      <img src="https://i.imgur.com/27u1MAs.png" alt="bloxd skin">
+      <img src="https://i.imgur.com/KY1QQO3.png" alt="cubo">
+    </div>
+
+    <div class="footer">Click en el panel para elegir una tecla</div>
   </div>
+
+  <script>
+    let currentKey = "k";
+    const panel = document.getElementById("keyPanel");
+
+    function toggleKeyPanel() {
+      panel.style.display = panel.style.display === "block" ? "none" : "block";
+    }
+
+    function setKey(input) {
+      currentKey = input.value.toLowerCase();
+      alert("✅ Tecla personalizada activada: " + currentKey.toUpperCase());
+    }
+
+    // Escucha la tecla definida
+    document.addEventListener("keydown", e => {
+      if (e.key.toLowerCase() === currentKey) {
+        alert("Hack activado con la tecla: " + currentKey.toUpperCase());
+        // Aquí puedes activar lo que quieras (ej: Kill Aura)
+      }
+    });
+  </script>
 
 </body>
 </html>
